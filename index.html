@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinando requisições</title>
+    <script type="module" src="index.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button type="button" class="getButton">GET requisition</button>
+    <br> <br>
+    <button type="submit" class="postButton">POST requisiton</button>
+    <label for="namePOST">Name:</label>
+    <input type="text" id="namePOST">
+    <label for="agePOST">Age:</label>
+    <input type="text" id="agePOST">
+    <label for="cityPOST">City:</label>
+    <input type="text" id="cityPOST">
+    <br> <br>
+    <button class="putButton">PUT requisition</button>
+    <label for="namePUT">Name:</label>
+    <input type="text" id="namePUT">
+    <label for="agePUT">Age:</label>
+    <input type="text" id="agePUT">
+    <label for="cityPUT">City:</label>
+    <input type="text" id="cityPUT">
+    <label for="id">ID:</label>
+    <input type="text" id="idPUT">
+    <br> <br>
+    <button class="deleteButton">DELETE requisition</button>
+    <label for="primaryKey">ID to be deleted:</label>
+    <input type="number" name="primaryKey" id="idDELETE">
+    <div class="People"></div>
+    
+</body>
+</html>
