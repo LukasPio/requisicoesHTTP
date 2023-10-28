@@ -2,6 +2,7 @@ const buttonGET = document.querySelector('.getButton')
 const buttonPOST = document.querySelector('.postButton')
 const buttonPUT = document.querySelector('.putButton')
 const buttonDELETE = document.querySelector('.deleteButton')
+const buttonPATCH = document.querySelector('.patchButton')
 const people = document.querySelector('.People')
 
 function createPeople(Person) {
@@ -45,7 +46,7 @@ async function postRequisition() {
     const agePOST = document.getElementById('agePOST').value
     const cityPOST = document.getElementById('cityPOST').value
 
-    if (!(namePOST.trim() && !agePOST && cityPOST.trim())) {
+    if (!namePOST || !agePOST || !cityPOST) {
         alert("All camps must be filled")
         throw new Error("All camps must be filled!")
     }
@@ -56,6 +57,7 @@ async function postRequisition() {
             City: cityPOST
         }) 
         alert(`${namePOST} was saved in the database`)
+        getRequision()
 }
 
 async function putRequisition() {
@@ -68,9 +70,9 @@ async function putRequisition() {
         Age: agePUT,
         City: cityPUT
     }
-    if (!(namePUT.trim() && agePUT.trim() && cityPUT.trim())) {
-        alert("At least one field must be changed")
-        throw new Error("At least one field must be changed!")
+    if (!namePUT || !agePUT || !cityPUT) {
+        alert("All camps must be filled!")
+        throw new Error("All camps must be filled!")
     }
     if(!idPUT) {
         alert("ID must be specified")
@@ -78,6 +80,38 @@ async function putRequisition() {
     }
     axios.put(`http://localhost:3000/Pessoas/${idPUT}`, updateData)
         alert(`${namePUT} was updated`)
+        getRequision()
+}
+
+async function patchRequisition() {
+    const namePATCH = document.getElementById('namePATCH').value
+    const agePATCH = document.getElementById('agePATCH').value
+    const cityPATCH = document.getElementById('cityPATCH').value
+    const idPATCH = document.getElementById('idPATCH').value
+
+    const updateData = {}
+
+    if (namePATCH) {
+        updateData.Name = namePATCH;
+    }
+
+    if (agePATCH) {
+        updateData.Age = agePATCH;
+    }
+
+    if (cityPATCH) {
+        updateData.City = cityPATCH;
+    }
+
+    if (!idPATCH) {
+        alert("ID must be specified")
+        throw new Error("ID must be specified")
+    }
+    if (!namePATCH && !agePATCH && !cityPATCH) {
+        alert("At least one camp must be filled!")
+        throw new Error("At least one camp must be filled!")
+    }
+    axios.patch(`http://localhost:3000/Pessoas/${idPATCH}`, updateData)
 }
 
 async function deleteRequisition() {
@@ -94,4 +128,5 @@ async function deleteRequisition() {
 buttonGET.addEventListener('click', getRequision);
 buttonPOST.addEventListener('click', postRequisition);
 buttonPUT.addEventListener('click', putRequisition);
+buttonPATCH.addEventListener('click', patchRequisition);
 buttonDELETE.addEventListener('click', deleteRequisition);
